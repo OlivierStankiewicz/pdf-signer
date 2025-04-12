@@ -99,6 +99,9 @@ def verify_pdf_signature():
     warning_label.set("")
     public_key = RSA.import_key(open("public_key.txt").read())
     pdf_path = askopenfilename(filetypes=[("PDF Files", "*.pdf")])
+    # check if user chose any file
+    if not os.path.exists(pdf_path):
+        return None
 
     # open the PDF file
     with open(pdf_path, 'rb') as file:
