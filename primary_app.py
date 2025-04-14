@@ -97,7 +97,11 @@ def sign_pdf():
 def verify_pdf_signature():
     pdf_signed_label.set("")
     warning_label.set("")
-    public_key = RSA.import_key(open("public_key.txt").read())
+    public_key_path = askopenfilename(filetypes=[("Text files", "*.txt")])
+    if not os.path.exists(public_key_path):
+        warning_label.set(f"Encrypted key file not found at {public_key_path}")
+        return None
+    public_key = RSA.import_key(open(public_key_path).read())
     pdf_path = askopenfilename(filetypes=[("PDF Files", "*.pdf")])
     # check if user chose any file
     if not os.path.exists(pdf_path):
