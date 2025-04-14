@@ -21,13 +21,11 @@ class App:
         self.verify_label = tk.StringVar()
         self.aes_pin = tk.StringVar()
 
-    # pad the plaintext
     def pad(self, data):
         padding_length = self.PAD_BLOCK_SIZE - len(data) % self.PAD_BLOCK_SIZE
         padding = chr(padding_length) * padding_length
         return data + padding.encode()
 
-    # unpad the plaintext
     def unpad(self, data):
         padding_length = data[-1]
         return data[:-padding_length]
@@ -69,11 +67,10 @@ class App:
             return None
 
         pdf_path = askopenfilename(title="Select a pdf file to sign", filetypes=[("PDF Files", "*.pdf")])
-        # check if user chose any file
+
         if not os.path.exists(pdf_path):
             return None
 
-        # open the PDF file
         with open(pdf_path, 'rb') as file:
             pdf_reader = PdfReader(file)
             pdf_writer = PdfWriter()
@@ -105,11 +102,11 @@ class App:
             return None
         public_key = RSA.import_key(open(public_key_path).read())
         pdf_path = askopenfilename(title="Select a pdf file to verify signature", filetypes=[("PDF Files", "*.pdf")])
-        # check if user chose any file
+
         if not os.path.exists(pdf_path):
             return None
 
-        # open the PDF file
+
         with open(pdf_path, 'rb') as file:
             pdf_reader = PdfReader(file)
 
