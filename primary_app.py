@@ -66,7 +66,7 @@ def sign_pdf():
     if private_key is None:
         return None
 
-    pdf_path = askopenfilename(filetypes=[("PDF Files", "*.pdf")])
+    pdf_path = askopenfilename(title="Select a pdf file to sign", filetypes=[("PDF Files", "*.pdf")])
     # check if user chose any file
     if not os.path.exists(pdf_path):
         return None
@@ -97,12 +97,12 @@ def sign_pdf():
 def verify_pdf_signature():
     pdf_signed_label.set("")
     warning_label.set("")
-    public_key_path = askopenfilename(filetypes=[("Text files", "*.txt")])
+    public_key_path = askopenfilename(title="Select the public key", filetypes=[("Text Files", "*.txt")])
     if not os.path.exists(public_key_path):
         warning_label.set(f"Encrypted key file not found at {public_key_path}")
         return None
     public_key = RSA.import_key(open(public_key_path).read())
-    pdf_path = askopenfilename(filetypes=[("PDF Files", "*.pdf")])
+    pdf_path = askopenfilename(title="Select a pdf file to verify signature", filetypes=[("PDF Files", "*.pdf")])
     # check if user chose any file
     if not os.path.exists(pdf_path):
         return None
