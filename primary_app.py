@@ -145,7 +145,7 @@ def update_drive_found_label():
     if not os.path.exists(f"{DRIVE_LETTER}:\\"):
         drive_found_label.set(f"Drive {DRIVE_LETTER}:\\ not found. Please insert the pendrive.")
     else:
-        drive_found_label.set("")
+        drive_found_label.set(f"Drive {DRIVE_LETTER}:\\ detected.")
 
     root.after(500, update_drive_found_label)
 
