@@ -98,7 +98,7 @@ class App:
         self.warning_label.set("")
         public_key_path = askopenfilename(title="Select the public key", filetypes=[("Text Files", "*.txt")])
         if not os.path.exists(public_key_path):
-            self.warning_label.set(f"Encrypted key file not found at {public_key_path}")
+            self.warning_label.set(f"Public key file not found at {public_key_path}")
             return None
         public_key = RSA.import_key(open(public_key_path).read())
         pdf_path = askopenfilename(title="Select a pdf file to verify signature", filetypes=[("PDF Files", "*.pdf")])
