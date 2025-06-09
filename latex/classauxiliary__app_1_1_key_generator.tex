@@ -1,0 +1,79 @@
+\doxysection{auxiliary\+\_\+app.\+Key\+Generator Class Reference}
+\hypertarget{classauxiliary__app_1_1_key_generator}{}\label{classauxiliary__app_1_1_key_generator}\index{auxiliary\_app.KeyGenerator@{auxiliary\_app.KeyGenerator}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classauxiliary__app_1_1_key_generator_a9050489888ddd00f6cfe55ca1b171f24}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self)
+\item 
+\mbox{\hyperlink{classauxiliary__app_1_1_key_generator_ad8931971f7e6f4f702d374c37ab4f76a}{generate\+\_\+keys}} (self)
+\item 
+\mbox{\hyperlink{classauxiliary__app_1_1_key_generator_a1b5e689a505bd845029473511c28c37f}{main}} (self)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classauxiliary__app_1_1_key_generator_a46a33dfca083493b9f360daa736c03b8}\label{classauxiliary__app_1_1_key_generator_a46a33dfca083493b9f360daa736c03b8} 
+{\bfseries root} = tk.\+Tk()
+\item 
+\Hypertarget{classauxiliary__app_1_1_key_generator_a13f465272cac9c2f7b883fca521724d6}\label{classauxiliary__app_1_1_key_generator_a13f465272cac9c2f7b883fca521724d6} 
+{\bfseries aes\+\_\+pin} = tk.\+String\+Var()
+\item 
+\Hypertarget{classauxiliary__app_1_1_key_generator_a376e45648a0616bea6199279b9fd0676}\label{classauxiliary__app_1_1_key_generator_a376e45648a0616bea6199279b9fd0676} 
+{\bfseries label\+\_\+text} = tk.\+String\+Var()
+\item 
+\Hypertarget{classauxiliary__app_1_1_key_generator_a4cad783c039cb305c27e6317da1a22d0}\label{classauxiliary__app_1_1_key_generator_a4cad783c039cb305c27e6317da1a22d0} 
+{\bfseries generate\+\_\+button} = tk.\+Button(self.\+root, text=\textquotesingle{}Generate keys\textquotesingle{}, command=self.\+generate\+\_\+keys)
+\item 
+\Hypertarget{classauxiliary__app_1_1_key_generator_ad7a2c12b685f77dd99818b75039b74c4}\label{classauxiliary__app_1_1_key_generator_ad7a2c12b685f77dd99818b75039b74c4} 
+{\bfseries status\+\_\+label} = tk.\+Label(self.\+root, textvariable=self.\+label\+\_\+text, width=40, anchor=\textquotesingle{}center\textquotesingle{})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}@brief Klasa do generowania pary kluczy RSA oraz szyfrowania klucza prywatnego z użyciem AES.
+\end{DoxyVerb}
+ 
+
+\label{doc-constructors}
+\Hypertarget{classauxiliary__app_1_1_key_generator_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classauxiliary__app_1_1_key_generator_a9050489888ddd00f6cfe55ca1b171f24}\index{auxiliary\_app.KeyGenerator@{auxiliary\_app.KeyGenerator}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!auxiliary\_app.KeyGenerator@{auxiliary\_app.KeyGenerator}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classauxiliary__app_1_1_key_generator_a9050489888ddd00f6cfe55ca1b171f24} 
+auxiliary\+\_\+app.\+Key\+Generator.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Inicjalizuje komponenty GUI i zmienne do przechowywania hasła oraz statusu.
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{classauxiliary__app_1_1_key_generator_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classauxiliary__app_1_1_key_generator_ad8931971f7e6f4f702d374c37ab4f76a}\index{auxiliary\_app.KeyGenerator@{auxiliary\_app.KeyGenerator}!generate\_keys@{generate\_keys}}
+\index{generate\_keys@{generate\_keys}!auxiliary\_app.KeyGenerator@{auxiliary\_app.KeyGenerator}}
+\doxysubsubsection{\texorpdfstring{generate\_keys()}{generate\_keys()}}
+{\footnotesize\ttfamily \label{classauxiliary__app_1_1_key_generator_ad8931971f7e6f4f702d374c37ab4f76a} 
+auxiliary\+\_\+app.\+Key\+Generator.\+generate\+\_\+keys (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Generuje parę kluczy RSA. Klucz prywatny szyfruje za pomocą AES na podstawie hasła użytkownika.
+@details
+- Hasło jest używane do wyprowadzenia klucza AES za pomocą algorytmu scrypt.
+- Szyfrowany klucz prywatny zapisywany jest do pliku "encrypted_private_key.txt".
+- Klucz publiczny zapisywany jest do pliku "public_key.txt".
+- W przypadku braku hasła, operacja zostaje przerwana.
+\end{DoxyVerb}
+ \Hypertarget{classauxiliary__app_1_1_key_generator_a1b5e689a505bd845029473511c28c37f}\index{auxiliary\_app.KeyGenerator@{auxiliary\_app.KeyGenerator}!main@{main}}
+\index{main@{main}!auxiliary\_app.KeyGenerator@{auxiliary\_app.KeyGenerator}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{classauxiliary__app_1_1_key_generator_a1b5e689a505bd845029473511c28c37f} 
+auxiliary\+\_\+app.\+Key\+Generator.\+main (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Uruchamia główne okno aplikacji GUI do generowania kluczy.
+@details Tworzy widżety GUI i wyświetla je użytkownikowi.
+\end{DoxyVerb}
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+auxiliary\+\_\+app.\+py\end{DoxyCompactItemize}

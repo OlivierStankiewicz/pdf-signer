@@ -6,12 +6,26 @@ from Crypto.Protocol.KDF import scrypt
 from Crypto.Util.Padding import pad
 
 class KeyGenerator:
+    """
+    @brief Klasa do generowania pary kluczy RSA oraz szyfrowania klucza prywatnego z użyciem AES.
+    """
     def __init__(self):
+        """
+        @brief Inicjalizuje komponenty GUI i zmienne do przechowywania hasła oraz statusu.
+        """
         self.root = tk.Tk()
         self.aes_pin = tk.StringVar()
         self.label_text = tk.StringVar()
 
     def generate_keys(self):
+        """
+        @brief Generuje parę kluczy RSA. Klucz prywatny szyfruje za pomocą AES na podstawie hasła użytkownika.
+        @details
+        - Hasło jest używane do wyprowadzenia klucza AES za pomocą algorytmu scrypt.
+        - Szyfrowany klucz prywatny zapisywany jest do pliku "encrypted_private_key.txt".
+        - Klucz publiczny zapisywany jest do pliku "public_key.txt".
+        - W przypadku braku hasła, operacja zostaje przerwana.
+        """
         if self.aes_pin.get() == "":
             self.label_text.set('Provide a valid password')
             return None
@@ -20,27 +34,27 @@ class KeyGenerator:
         self.generate_button.config(state=tk.DISABLED)
         self.root.update_idletasks()
 
-        # generate a key pair
+        # Generowanie pary kluczy RSA
         key = RSA.generate(4096)
         private_key = key.export_key()
         public_key = key.publickey().export_key()
 
-        # generate a random salt for key derivation
+        # Generowanie soli i klucza AES z hasła
         salt = get_random_bytes(16)
         aes_key = scrypt(self.aes_pin.get(), salt, key_len=32, N=2**20, r=8, p=1)
 
-        # generate a random initialization vector (IV) for AES
+        # Generowanie wektora inicjalizującego
         iv = get_random_bytes(16)
 
-        # encrypt the private key using AES in CBC mode
+        # Szyfrowanie klucza prywatnego
         cipher = AES.new(aes_key, AES.MODE_CBC, iv)
         encrypted_private_key = cipher.encrypt(pad(private_key, AES.block_size))
         
-        # save the private key, salt, and IV together
+        # Zapis zaszyfrowanego klucza prywatnego do pliku
         with open("encrypted_private_key.txt", "wb") as priv_file:
             priv_file.write(salt + iv + encrypted_private_key)
 
-        # save the public key
+        # Zapis klucza publicznego do pliku
         with open("public_key.txt", "wb") as pub_file:
             pub_file.write(public_key)
 
@@ -48,6 +62,10 @@ class KeyGenerator:
         self.generate_button.config(state=tk.NORMAL)
 
     def main(self):
+        """
+        @brief Uruchamia główne okno aplikacji GUI do generowania kluczy.
+        @details Tworzy widżety GUI i wyświetla je użytkownikowi.
+        """
         self.root.geometry('360x240')
         self.root.title('Key pair generator')
 
